@@ -1,0 +1,9 @@
+# VSCode config for building and running a SDL project
+.vscode/
+
+# All SDL files
+src/include/SDL3
+src/lib
+
+# .exe outputs for better project organization (and the SDL3.dll for running the executable file)
+output/
