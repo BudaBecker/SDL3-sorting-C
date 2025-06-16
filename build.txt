@@ -1,0 +1,2 @@
+    -= Just an easy access to the compiler command =-
+gcc OneFile.c -o .\output\OneFile.exe -I.\src\include\ -L.\src\lib\ -lSDL3
