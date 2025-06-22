@@ -19,6 +19,7 @@
 #define ARRAY_SIZE 100
 #define DELAY_MS 5
 
+// Base struct with the algorithm variables
 struct SortingAlgorithm {
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -43,6 +44,8 @@ void sorting_iteration(struct SortingAlgorithm *prog);
 void render(struct SortingAlgorithm *prog);
 
 int main(int argc, char *argv[]) {
+
+    // Set the initial conditions
     struct SortingAlgorithm prog = {0};
     prog.is_running = true;
     prog.sorting_complete = false;
@@ -103,6 +106,8 @@ void sdl_events(struct SortingAlgorithm *prog) {
 }
 
 void sorting_iteration(struct SortingAlgorithm *prog) {
+    // A single iteration of a bubble sort algorithm
+
     if (prog->sorting_complete) {
         if (prog->pivot != -1) {
             // TODO:
