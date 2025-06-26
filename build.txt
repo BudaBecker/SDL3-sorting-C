@@ -1,2 +1,3 @@
     -= Just an easy access to the compiler command =-
-gcc OneFile.c -o .\output\OneFile.exe -I.\src\include\ -L.\src\lib\ -lSDL3
+gcc *.c .\algorithms\bubble_sort.c -o ..\output\Bubble.exe -I../build/include -L../build/lib -lSDL3
+

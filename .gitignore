@@ -2,8 +2,8 @@
 .vscode/
 
 # All SDL files
-src/include/SDL3
-src/lib
+build/lib
+build/include/SDL3
 
 # .exe outputs for better project organization (and the SDL3.dll for running the executable file)
 output/
