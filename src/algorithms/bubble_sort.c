@@ -4,12 +4,6 @@ void sorting_iteration(struct SortingAlgorithm *prog) {
     // A single iteration of a bubble sort algorithm
 
     if (prog->sorting_complete) {
-        if (prog->pivot != -1) {
-            // TODO:
-            printf("render complete animation");
-            prog->pivot = -1;
-        }
-
         render(prog);
         return;
     }
