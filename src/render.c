@@ -1,5 +1,7 @@
 #include "render.h"
 
+// TODO: Pitch sound according to the bar height.
+
 void render(struct SortingAlgorithm *prog) {
     // Display the current frame
 
@@ -25,10 +27,7 @@ void draw_array(struct SortingAlgorithm *prog) {
             .w = bar_width,
             .h = bar_height};
 
-        if (prog->sorting_complete) {
-            SDL_SetRenderDrawColor(prog->renderer, 50, 255, 50, 255); // Set color when completed (Green)
-
-        } else if (i == prog->pivot) {
+        if (i == prog->pivot) {
             SDL_SetRenderDrawColor(prog->renderer, 50, 50, 255, 255); // Set pivot color (Blue)
 
         } else if (i == prog->comparing_pivot) {
@@ -39,5 +38,38 @@ void draw_array(struct SortingAlgorithm *prog) {
         }
 
         SDL_RenderFillRect(prog->renderer, &bar); // fill the bar
+    }
+}
+
+void final_animation(struct SortingAlgorithm *prog) {
+    // Progressive final animation: bars turn green one by one
+
+    float bar_width = (float)WINDOW_WIDTH / ARRAY_SIZE;
+
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        // Clear the screen
+        SDL_SetRenderDrawColor(prog->renderer, 20, 20, 30, 255); // Background
+        SDL_RenderClear(prog->renderer);
+
+        // Draw all bars up to i in green, rest in white
+        for (int j = 0; j < ARRAY_SIZE; j++) {
+            float bar_height = ((float)prog->array[j] / ARRAY_SIZE) * (WINDOW_HEIGHT - 50);
+
+            SDL_FRect bar = {
+                .x = j * bar_width,
+                .y = WINDOW_HEIGHT - bar_height,
+                .w = bar_width,
+                .h = bar_height};
+
+            if (j <= i) {
+                SDL_SetRenderDrawColor(prog->renderer, 50, 255, 50, 255); // Green
+            } else {
+                SDL_SetRenderDrawColor(prog->renderer, 225, 225, 225, 255); // White
+            }
+            SDL_RenderFillRect(prog->renderer, &bar);
+        }
+
+        SDL_RenderPresent(prog->renderer);
+        SDL_Delay(DELAY_MS);
     }
 }
