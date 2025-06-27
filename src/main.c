@@ -32,10 +32,14 @@ int main(int argc, char *argv[]) {
     }
 
     // Main loop
-    while (prog.is_running) {
+    while (prog.is_running && !prog.sorting_complete) {
         sdl_events(&prog);
         sorting_iteration(&prog);
     }
+
+    // End animation
+    render(&prog);
+    final_animation(&prog);
 
     // Close and Free memory
     sdl_free(&prog);
