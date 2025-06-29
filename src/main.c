@@ -15,33 +15,29 @@
 
 int main(int argc, char *argv[]) {
 
-    // Set the initial conditions
+    // Create program and audio
     struct SortingAlgorithm prog = {0};
-    prog.is_running = true;
-    prog.sorting_complete = false;
-    prog.iterations = 0;
-    prog.pivot = 0;
-    prog.swapped = false;
-    prog.comparing_pivot = -1;
-    prog.sorted_until_idx = ARRAY_SIZE;
+    struct SDLaudio audio = {0};
 
     // Start SDL
-    if (!sdl_init(&prog)) {
-        sdl_free(&prog);
+    if (!sdl_init(&prog, &audio)) {
+        sdl_free(&prog, &audio);
         return EXIT_FAILURE;
     }
 
     // Main loop
     while (prog.is_running && !prog.sorting_complete) {
-        sdl_events(&prog);
+        sdl_events(&prog, &audio);
         sorting_iteration(&prog);
     }
 
     // End animation
-    render(&prog);
-    final_animation(&prog);
+    if (prog.sorting_complete) {
+        render(&prog);
+        final_animation(&prog);
+    }
 
     // Close and Free memory
-    sdl_free(&prog);
+    sdl_free(&prog, &audio);
     return EXIT_SUCCESS;
 }
