@@ -5,8 +5,8 @@
  *   Also inspired by https://www.youtube.com/@HirschDaniel
  */
 
-#include "bubble_sort.h" // Change this to whatever sort algorithm
 #include "config.h"
+#include "insertion_sort.h" // Change this to whatever sort algorithm
 #include "render.h"
 #include "sdl_wrapper.h"
 #include "sorting_algorithm.h"
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 
     // End animation
     if (prog.sorting_complete) {
-        render(&prog, &audio);
+        render(&prog);
         final_animation(&prog, &audio);
     }
 

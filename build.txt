@@ -1,3 +1,4 @@
     -= Just an easy access to the compiler command =-
 gcc *.c .\algorithms\bubble_sort.c -o ..\output\Bubble.exe -I../build/include -L../build/lib -lSDL3
-
+gcc *.c .\algorithms\insertion_sort.c -o ..\output\Insertion.exe -I../build/include -L../build/lib -lSDL3
+gcc *.c .\algorithms\quick_sort.c -o ..\output\Quick.exe -I../build/include -L../build/lib -lSDL3
