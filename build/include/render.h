@@ -6,7 +6,7 @@
 #include "sorting_algorithm.h"
 
 void draw_array(struct SortingAlgorithm *prog);
-void render(struct SortingAlgorithm *prog, struct SDLaudio *audio);
+void render(struct SortingAlgorithm *prog);
 void pop_sound(struct SortingAlgorithm *prog, struct SDLaudio *audio, int piv);
 void final_animation(struct SortingAlgorithm *prog, struct SDLaudio *audio);
 

@@ -1,6 +1,6 @@
 #include "render.h"
 
-void render(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
+void render(struct SortingAlgorithm *prog) {
     // Display the current frame
 
     SDL_SetRenderDrawColor(prog->renderer, 20, 20, 30, 255); // Background

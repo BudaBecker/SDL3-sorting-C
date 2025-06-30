@@ -4,14 +4,14 @@ void sorting_iteration(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
     // A single iteration of a bubble sort algorithm
 
     if (prog->sorting_complete) {
-        render(prog, audio);
+        render(prog);
         return;
     }
 
     if (prog->iterations < ARRAY_SIZE - 1) {
         if (prog->pivot < ARRAY_SIZE - prog->iterations - 1) { // if the pivot not in the end of the unordered part of the array
             prog->comparing_pivot = prog->pivot + 1;
-            render(prog, audio);
+            render(prog);
 
             // Standard bubble sort swap
             if (prog->array[prog->pivot] > prog->array[prog->pivot + 1]) {
@@ -22,7 +22,7 @@ void sorting_iteration(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
             }
 
             prog->pivot++;
-            render(prog, audio);
+            render(prog);
 
         } else {
             prog->sorted_until_idx = ARRAY_SIZE - 1 - prog->iterations; // optimization so it doest need to go through all the array (only the unordered part)
@@ -37,7 +37,7 @@ void sorting_iteration(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
                 prog->pivot = 0;
                 prog->comparing_pivot = -1;
                 prog->swapped = false;
-                render(prog, audio);
+                render(prog);
             }
         }
 
