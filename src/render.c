@@ -1,8 +1,6 @@
 #include "render.h"
 
-// TODO: Pitch sound according to the bar height.
-
-void render(struct SortingAlgorithm *prog) {
+void render(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
     // Display the current frame
 
     SDL_SetRenderDrawColor(prog->renderer, 20, 20, 30, 255); // Background
@@ -41,7 +39,19 @@ void draw_array(struct SortingAlgorithm *prog) {
     }
 }
 
-void final_animation(struct SortingAlgorithm *prog) {
+void pop_sound(struct SortingAlgorithm *prog, struct SDLaudio *audio, int piv) {
+    float frequency;
+
+    frequency = INIT_FREQ + (piv - 1) * (FINAL_FREQ - INIT_FREQ) / (ARRAY_SIZE - 1);
+
+    SDL_SetAudioStreamFrequencyRatio(audio->stream, frequency);
+    SDL_ClearAudioStream(audio->stream);
+    SDL_PutAudioStreamData(audio->stream, audio->buffer, audio->length);
+    SDL_FlushAudioStream(audio->stream);
+    SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(audio->stream));
+}
+
+void final_animation(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
     // Progressive final animation: bars turn green one by one
 
     float bar_width = (float)WINDOW_WIDTH / ARRAY_SIZE;
@@ -69,7 +79,8 @@ void final_animation(struct SortingAlgorithm *prog) {
             SDL_RenderFillRect(prog->renderer, &bar);
         }
 
+        pop_sound(prog, audio, i + 1);
         SDL_RenderPresent(prog->renderer);
-        SDL_Delay(DELAY_MS);
+        SDL_Delay(30);
     }
 }

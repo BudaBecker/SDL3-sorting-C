@@ -8,6 +8,6 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-void sorting_iteration(struct SortingAlgorithm *prog);
+void sorting_iteration(struct SortingAlgorithm *prog, struct SDLaudio *audio);
 
 #endif

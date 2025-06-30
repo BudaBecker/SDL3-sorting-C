@@ -20,7 +20,7 @@ void array_init(struct SortingAlgorithm *prog) {
 bool sdl_init(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
     // SDL basic init (window and renderer), and prevents any errors when initializing
 
-    // program and audio initial conditions
+    // program initial conditions
     prog->is_running = true;
     prog->sorting_complete = false;
     prog->iterations = 0;
@@ -28,7 +28,6 @@ bool sdl_init(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
     prog->swapped = false;
     prog->comparing_pivot = -1;
     prog->sorted_until_idx = ARRAY_SIZE;
-    audio->freq = 1.0;
 
     if (!SDL_Init(SDL_FLAGS)) {
         fprintf(stderr, "Error initializing SDL3: %s\n", SDL_GetError());
@@ -96,7 +95,7 @@ void sdl_free(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
     printf("\nALL CLEAN!\n\n");
 }
 
-void sdl_events(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
+void sdl_events(struct SortingAlgorithm *prog) {
     // SDL event handling (for this program only for closing the window)
 
     while (SDL_PollEvent(&prog->event)) {
@@ -106,13 +105,6 @@ void sdl_events(struct SortingAlgorithm *prog, struct SDLaudio *audio) {
         } else if (prog->event.type == SDL_EVENT_KEY_DOWN) {
             if (prog->event.key.scancode == SDL_SCANCODE_ESCAPE) {
                 prog->is_running = false;
-            }
-            if (prog->event.key.scancode == SDL_SCANCODE_SPACE && !prog->event.key.repeat) {
-                SDL_SetAudioStreamFrequencyRatio(audio->stream, audio->freq);
-                SDL_ClearAudioStream(audio->stream);
-                SDL_PutAudioStreamData(audio->stream, audio->buffer, audio->length);
-                SDL_FlushAudioStream(audio->stream);
-                SDL_ResumeAudioDevice(SDL_GetAudioStreamDevice(audio->stream));
             }
         }
     }

@@ -27,14 +27,14 @@ int main(int argc, char *argv[]) {
 
     // Main loop
     while (prog.is_running && !prog.sorting_complete) {
-        sdl_events(&prog, &audio);
-        sorting_iteration(&prog);
+        sdl_events(&prog);
+        sorting_iteration(&prog, &audio);
     }
 
     // End animation
     if (prog.sorting_complete) {
-        render(&prog);
-        final_animation(&prog);
+        render(&prog, &audio);
+        final_animation(&prog, &audio);
     }
 
     // Close and Free memory
